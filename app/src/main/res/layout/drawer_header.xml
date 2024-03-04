@@ -6,4 +6,21 @@
     android:layout_height="250dp"
     android:background="@color/black">
 
+    <ImageView
+        android:layout_width="231dp"
+        android:layout_height="211dp"
+        android:padding="10dp"
+        android:src="@drawable/jdm_v"
+        tools:ignore="ContentDescription"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/jdm_v2"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        />
+
 </LinearLayout>
