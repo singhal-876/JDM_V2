@@ -1,4 +1,4 @@
-package com.abhinav.jdm_v2
+package com.abhinav.jdm_v2.activity
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -10,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.abhinav.jdm_v2.fragment.AboutUsFragment
+import com.abhinav.jdm_v2.fragment.DashboardFragment
+import com.abhinav.jdm_v2.fragment.FavouritesFragment
+import com.abhinav.jdm_v2.fragment.ProfileFragment
+import com.abhinav.jdm_v2.R
 import com.google.android.material.navigation.NavigationView
 
 @Suppress("DEPRECATION")

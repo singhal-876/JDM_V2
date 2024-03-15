@@ -3,11 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardFragment">
+    tools:context=".fragment.DashboardFragment">
 
     <TextView
+        android:id="@+id/txtDashboard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/dashboard_txt"/>
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_txt"
+        android:padding="10dp"
+        android:layout_margin="5dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDashboard"
+        android:padding="10dp"
+        android:layout_margin="5dp"/>
 
 </RelativeLayout>

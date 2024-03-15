@@ -12,4 +12,5 @@
     <string name="favourites_txt">Favourites</string>
     <string name="about_us_txt">About Us</string>
     <string name="profile_txt">Profile</string>
+    <string name="list_cars">List Cars</string>
 </resources>
