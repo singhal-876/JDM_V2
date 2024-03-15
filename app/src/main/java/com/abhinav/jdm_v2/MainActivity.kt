@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var previousMenuItem: MenuItem? = null
+
         drawerLayout = findViewById(R.id.drawer)
         coordinatorLayout = findViewById(R.id.coordinator)
         frameLayout = findViewById(R.id.frame)
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         navigationLayout = findViewById(R.id.navigation)
 
         setUpToolbar()
+        openDashboard()
 
         val actionBarDrawerLayout =
             ActionBarDrawerToggle(this@MainActivity, drawerLayout, R.string.open, R.string.close)
@@ -40,41 +44,49 @@ class MainActivity : AppCompatActivity() {
 
         navigationLayout.setNavigationItemSelectedListener {
 
-            when(it.itemId){
+            if (previousMenuItem != null) {
+                previousMenuItem?.isChecked = false
+            }
+
+            it.isChecked = true
+            it.isCheckable = true
+            previousMenuItem = it
+
+            when (it.itemId) {
                 R.id.dashboard -> {
                     Toast.makeText(this@MainActivity, "Dashboard", Toast.LENGTH_SHORT).show()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame, DashboardFragment())
-                        .addToBackStack("Dashboard")
-                        .commit()
+                    openDashboard()
 
                     drawerLayout.closeDrawers()
                 }
+
                 R.id.favourites -> {
                     Toast.makeText(this@MainActivity, "Favourites", Toast.LENGTH_SHORT).show()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame, FavouritesFragment())
-                        .addToBackStack("Favourites")
                         .commit()
 
+                    supportActionBar?.title = "Favourites"
                     drawerLayout.closeDrawers()
                 }
+
                 R.id.profile -> {
                     Toast.makeText(this@MainActivity, "Profile", Toast.LENGTH_SHORT).show()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame, ProfileFragment())
-                        .addToBackStack("Profile")
                         .commit()
 
+                    supportActionBar?.title = "Profile"
                     drawerLayout.closeDrawers()
                 }
+
                 R.id.about_us -> {
                     Toast.makeText(this@MainActivity, "About Us", Toast.LENGTH_SHORT).show()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame, AboutUsFragment())
-                        .addToBackStack("About Us")
                         .commit()
 
+                    supportActionBar?.title = "About Us"
                     drawerLayout.closeDrawers()
                 }
             }
@@ -92,12 +104,33 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        val id=item.itemId
-        if(id == android.R.id.home){
+        val id = item.itemId
+        if (id == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun openDashboard() {
+        val fragment = DashboardFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame, fragment)
+        transaction.commit()
+        supportActionBar?.title = "Dashboard"
+        navigationLayout.setCheckedItem(R.id.dashboard)
+    }
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        val frag = supportFragmentManager.findFragmentById(R.id.frame)
+
+        when (frag) {
+            !is DashboardFragment -> openDashboard()
+
+            else -> super.onBackPressed()
+        }
     }
 
 }
