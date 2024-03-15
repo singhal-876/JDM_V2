@@ -5,4 +5,6 @@
     <string name="profile">Profile</string>
     <string name="about_us">About Us</string>
     <string name="jdm_v2">JDM V2</string>
+    <string name="open">Open_Drawer</string>
+    <string name="close">Close_Drawer</string>
 </resources>
